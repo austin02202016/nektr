@@ -35,22 +35,7 @@ export function FooterSection() {
             </div>
           </motion.div>
 
-          {/* Navigation - CLEANED UP */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <h4 className="text-lg font-semibold text-amber-200 mb-4">Navigation</h4>
-            <nav className="space-y-2">
-              <FooterLink href="#story">Our Story</FooterLink>
-              <FooterLink href="#benefits">Benefits</FooterLink>
-              <FooterLink href="#waitlist">Join Waitlist</FooterLink>
-            </nav>
-          </motion.div>
-
-          {/* REMOVED: Coming Soon section that contained unwanted links */}
+          {/* REMOVED: Navigation section */}
         </div>
 
         {/* Bottom Bar */}

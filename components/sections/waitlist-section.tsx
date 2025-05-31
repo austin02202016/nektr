@@ -10,14 +10,18 @@ import { useEmailSubmission } from "@/hooks/use-email-submission"
 
 export function WaitlistSection() {
   const [email, setEmail] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const { submitEmail, isSubmitting, submitted, message, showSuccessAnimation, resetForm } = useEmailSubmission()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email.trim()) {
-      const result = await submitEmail(email, "Main Waitlist")
+    if (email.trim() && firstName.trim() && lastName.trim()) {
+      const result = await submitEmail(email, "Main Waitlist", firstName, lastName)
       if (result.success) {
         setEmail("") // Clear the form
+        setFirstName("")
+        setLastName("")
       }
     }
   }
@@ -182,6 +186,26 @@ export function WaitlistSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
+              <div className="grid grid-cols-2 gap-3">
+                <Input
+                  type="text"
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  className="px-6 py-4 rounded-full border-2 border-amber-200 focus:border-amber-400 focus:ring-amber-400 text-lg transition-all duration-200"
+                />
+                <Input
+                  type="text"
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  className="px-6 py-4 rounded-full border-2 border-amber-200 focus:border-amber-400 focus:ring-amber-400 text-lg transition-all duration-200"
+                />
+              </div>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Input
                   type="email"

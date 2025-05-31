@@ -13,7 +13,12 @@ export function useEmailSubmission() {
   const [message, setMessage] = useState("")
   const [showSuccessAnimation, setShowSuccessAnimation] = useState(false)
 
-  const submitEmail = async (email: string, page = "Landing Page"): Promise<EmailSubmissionResult> => {
+  const submitEmail = async (
+    email: string,
+    page = "Landing Page",
+    firstName: string,
+    lastName: string
+  ): Promise<EmailSubmissionResult> => {
     setIsSubmitting(true)
     setMessage("")
     setShowSuccessAnimation(false)
@@ -24,7 +29,7 @@ export function useEmailSubmission() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, page }),
+        body: JSON.stringify({ email, page, firstName, lastName }),
       })
 
       // Check if response is ok
@@ -39,12 +44,6 @@ export function useEmailSubmission() {
       setShowSuccessAnimation(true)
       setMessage(result.message || "Thank you for joining our waitlist!")
 
-      // Keep the success animation visible permanently
-      // Remove the timeout that hides the animation
-      // setTimeout(() => {
-      //   setShowSuccessAnimation(false)
-      // }, 4000)
-
       return { success: true, message: result.message }
     } catch (error) {
       console.error("Frontend submission error:", error)
@@ -54,12 +53,6 @@ export function useEmailSubmission() {
       setShowSuccessAnimation(true)
       setMessage("Thank you for joining our waitlist! We'll notify you when Mad Nektr launches.")
 
-      // Keep the success animation visible permanently
-      // Remove the timeout that hides the animation
-      // setTimeout(() => {
-      //   setShowSuccessAnimation(false)
-      // }, 4000)
-
       return { success: true, message: "Thank you for joining our waitlist!" }
     } finally {
       setIsSubmitting(false)
@@ -68,9 +61,8 @@ export function useEmailSubmission() {
 
   const resetForm = () => {
     setSubmitted(false)
-    setMessage("")
-    setIsSubmitting(false)
     setShowSuccessAnimation(false)
+    setMessage("")
   }
 
   return {
