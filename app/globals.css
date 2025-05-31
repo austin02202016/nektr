@@ -1,0 +1,752 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+
+    /* Original Mad Nektr color palette */
+    --matte-white: 40 30% 96%;
+    --deep-violet: 260 30% 42%;
+    --iridescent-sky: 210 100% 76%;
+    --lustrous-rose: 330 80% 83%;
+    --honeyed-gold: 40 50% 62%;
+    --charcoal-mist: 0 0% 16%;
+    --opaline-violet: 260 65% 83%;
+    --transparent-bronze: 35 35% 52% / 0.8;
+  }
+
+  * {
+    @apply border-border;
+    cursor: auto !important; /* Fix cursor to default */
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background-color: #f8f6f1; /* Original matte white background */
+    color: #2a2a2a; /* Original charcoal text */
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    cursor: auto !important; /* Ensure default cursor */
+    /* NUCLEAR FIX: Push everything down for banner */
+    margin-top: 48px !important;
+    padding-top: 0 !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Remove custom cursor styling completely */
+  * {
+    cursor: auto !important;
+  }
+
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: auto !important;
+  }
+
+  /* Hide the unwanted text section */
+  .experience-section .bg-gray-50.rounded-2xl p {
+    display: none !important;
+  }
+
+  /* Alternative selector to hide the specific quote */ \
+  blockquote:has-text("This isn't about getting drunk"),
+  p:has-text("This isn't about getting drunk") {
+    display: none !important;
+  }
+
+  /* More specific hiding for the quote section */
+  .text-xl.italic.text-slate-800:has-text("This isn't about getting drunk") {
+    display: none !important;
+  }
+}
+
+@layer components {
+  .premium-gradient {
+    background: linear-gradient(135deg, #f8f6f1 0%, #f5f3ee 100%); /* Original gradient */
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #f5b2d6, #87c7ff, #c4b7f2); /* Original gradient colors */
+  }
+
+  .premium-button {
+    @apply text-white font-medium px-8 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105;
+    background: linear-gradient(135deg, #f5b2d6, #87c7ff); /* Original button gradient */
+    cursor: pointer !important;
+  }
+
+  .premium-button-outline {
+    @apply font-medium px-8 py-4 rounded-full transition-all duration-300 hover:scale-105;
+    border: 2px solid #d6af66; /* Original border color */
+    color: #5e4b8b; /* Original text color */
+    background: transparent;
+    cursor: pointer !important;
+  }
+
+  .premium-button-outline:hover {
+    background-color: #f8f6f1; /* Original hover background */
+  }
+
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+
+  .container-padding {
+    @apply px-6 md:px-8 lg:px-12;
+  }
+
+  /* Premium typography with original colors */
+  .heading-xl {
+    @apply text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-none;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-5xl lg:text-6xl font-light tracking-tight;
+    color: #5e4b8b !important; /* Original heading color */
+  }
+
+  .heading-md {
+    @apply text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight;
+    color: #5e4b8b !important; /* Original heading color */
+  }
+
+  .body-lg {
+    @apply text-lg md:text-xl leading-relaxed;
+    color: #2a2a2a !important; /* Original body text color */
+  }
+
+  .body-md {
+    @apply text-base md:text-lg leading-relaxed;
+    color: #2a2a2a !important; /* Original body text color */
+  }
+
+  /* Animations */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Subtle textures */
+  .subtle-texture {
+    background-image: radial-gradient(circle at 1px 1px, rgba(94, 75, 139, 0.02) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+
+  /* Product can size increases */
+  .hero-can-image img,
+  .purchase-can-image img,
+  .product-page-can img {
+    transform: scale(1.4) !important; /* Increase can size by 40% */
+    width: auto !important;
+    height: auto !important;
+  }
+
+  /* Adjust containers to accommodate larger cans */
+  .hero-can-container,
+  .purchase-can-container,
+  .product-can-container {
+    overflow: visible !important;
+    padding: 2rem !important;
+  }
+
+  /* Original color overrides for specific elements */
+  .text-slate-900 {
+    color: #5e4b8b !important;
+  }
+
+  .text-slate-700 {
+    color: #2a2a2a !important;
+  }
+
+  .text-slate-600 {
+    color: #87c7ff !important;
+  }
+
+  .bg-gray-50 {
+    background-color: #f8f6f1 !important;
+  }
+
+  .bg-white {
+    background-color: #fefefe !important;
+  }
+
+  .border-gray-100 {
+    border-color: rgba(214, 175, 102, 0.2) !important;
+  }
+
+  /* NUCLEAR BANNER FIX - OPTION 1 */
+  /* Force banner to top of page */
+  .banner,
+  .promo-banner,
+  .announcement-bar,
+  [class*="banner"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 9999 !important;
+    height: 48px !important;
+    margin: 0 !important;
+    padding: 12px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Push navigation below banner */
+  .navigation,
+  .navbar,
+  nav,
+  header,
+  .header {
+    margin-top: 0 !important;
+    position: fixed !important;
+    top: 48px !important;
+    z-index: 100 !important;
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  /* When navbar is scrolled, move it to top and hide banner */
+  .navbar-scrolled {
+    top: 0 !important;
+    z-index: 10000 !important;
+  }
+
+  /* Adjust hero section to account for banner + nav */
+  .hero-section {
+    padding-top: 140px !important; /* Banner height + nav height */
+  }
+
+  /* NUCLEAR OPTION: REMOVE UNWANTED TEXT ELEMENTS */
+  /* Hide specific unwanted text */
+  *:contains("ShipStory"),
+  *:contains("Ingredients"),
+  *:contains("Press"),
+  div:contains("ShipStory"),
+  div:contains("Ingredients"), 
+  div:contains("Press"),
+  span:contains("ShipStory"),
+  span:contains("Ingredients"),
+  span:contains("Press"),
+  a:contains("ShipStory"),
+  a:contains("Ingredients"),
+  a:contains("Press"),
+  li:contains("ShipStory"),
+  li:contains("Ingredients"),
+  li:contains("Press") {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Hide footer coming soon section that contains unwanted links */
+  .footer-section .space-y-2:has(a[href="#"]) {
+    display: none !important;
+  }
+
+  /* Hide any navigation menu that might be misplaced */
+  .menu,
+  .nav-menu,
+  .sidebar,
+  .footer-links,
+  .floating-menu,
+  .overlay-menu,
+  .hidden-nav {
+    display: none !important;
+  }
+
+  /* Hide the specific quote text */
+  .experience-section .text-xl.italic {
+    display: none !important;
+  }
+
+  /* Alternative approach to hide the quote */
+  section:has(.text-xl.italic:contains("This isn't about getting drunk")) .bg-gray-50 {
+    display: none !important;
+  }
+
+  /* Make microdosed mad honey text black but NOT bold */
+  .hero-section .text-slate-600 {
+    color: black !important;
+    font-weight: normal !important; /* Changed from bold to normal */
+  }
+
+  /* SPACING FIX: Reduce excessive space around can images */
+  /* Conservative approach - reduce container padding */
+  .hero-section {
+    padding-top: 4rem !important; /* Reduced from larger values */
+    padding-bottom: 4rem !important;
+  }
+
+  .purchase-section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Adjust can container spacing specifically */
+  .hero-can-container,
+  .purchase-can-container,
+  .product-can-container {
+    padding: 2rem !important; /* Reduced from 4rem and 6rem */
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Fine-tune section spacing */
+  .section-padding {
+    padding-top: 4rem !important; /* Reduced from 5rem+ */
+    padding-bottom: 4rem !important;
+  }
+
+  /* Responsive spacing adjustments */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding-top: 3rem !important;
+      padding-bottom: 3rem !important;
+    }
+
+    .purchase-section {
+      padding-top: 3rem !important;
+      padding-bottom: 3rem !important;
+      margin-top: 1.5rem !important;
+      margin-bottom: 1.5rem !important;
+    }
+
+    .hero-can-container,
+    .purchase-can-container,
+    .product-can-container {
+      padding: 1.5rem !important;
+      margin-top: 0.5rem !important;
+      margin-bottom: 0.5rem !important;
+    }
+
+    .section-padding {
+      padding-top: 3rem !important;
+      padding-bottom: 3rem !important;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .hero-can-container,
+    .purchase-can-container {
+      padding: 2.5rem !important;
+    }
+  }
+
+  /* Ensure proper spacing between sections */
+  .benefits-section,
+  .experience-section,
+  .story-section,
+  .waitlist-section {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Product page specific spacing */
+  .product-page .product-can-container {
+    padding: 2rem !important;
+    margin: 1rem 0 !important;
+  }
+
+  /* Premium Success Animation Styles */
+  .checkmark-svg {
+    filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.2));
+  }
+
+  /* Loading button animation */
+  .premium-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+  /* Success animation keyframes */
+  @keyframes successPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+  }
+
+  /* Smooth form transitions */
+  .form-submitting {
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Success message typography */
+  .success-message {
+    font-family: "Inter", sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  /* Enhanced button loading state */
+  .premium-button:disabled::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Success indicators animation */
+  .success-indicators {
+    animation: slideInUp 0.4s ease-out;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Enhanced Success Animation with Iridescent Gradient */
+  .success-animation-gradient {
+    background: linear-gradient(135deg, #f5b2d6 0%, #87c7ff 50%, #c4b7f2 100%) !important;
+    background-size: 200% 200% !important;
+    animation: gradientShift 4s ease infinite !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Enhanced checkmark visibility on gradient */
+  .checkmark-svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  /* Success text with better readability */
+  .success-text-gradient {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    font-weight: 600 !important;
+  }
+
+  /* Success indicators with glass effect */
+  .success-indicator-gradient {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* Add these rules to fix the fourth section scroll issue */
+  .mad-nektr-section,
+  .fourth-section,
+  .product-section,
+  .purchase-section {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  /* Remove any scroll snap or independent scrolling */
+  .mad-nektr-section *,
+  .fourth-section *,
+  .product-section *,
+  .purchase-section * {
+    scroll-behavior: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure success animation always uses gradient styling */
+  .success-animation,
+  .success-green,
+  .success-animation.green,
+  .email-success-green,
+  .bg-gradient-to-br.from-green-50.to-emerald-50 {
+    background: linear-gradient(135deg, #f5b2d6, #87c7ff, #c4b7f2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Ensure checkmark stays white, not green */
+  .checkmark-circle,
+  .checkmark-path,
+  .checkmark-svg path,
+  .checkmark-svg circle {
+    stroke: white !important;
+  }
+
+  .success-message,
+  .text-green-700,
+  .text-green-800,
+  .text-green-600 {
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* ADDITIONAL NUCLEAR TEXT REMOVAL */
+/* Target any element containing unwanted text */
+[data-text*="ShipStory"],
+[data-text*="Ingredients"],
+[data-text*="Press"],
+[title*="ShipStory"],
+[title*="Ingredients"],
+[title*="Press"],
+[alt*="ShipStory"],
+[alt*="Ingredients"],
+[alt*="Press"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Hide any text nodes containing these words */
+.footer-section a[href="#"]:contains("Shop"),
+.footer-section a[href="#"]:contains("Ingredients"),
+.footer-section a[href="#"]:contains("Stockists"),
+.footer-section a[href="#"]:contains("Press") {
+  display: none !important;
+}
+
+/* Custom scrollbar with original colors */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f6f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d6af66;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c4b7f2;
+}
+
+/* Ensure all interactive elements have proper cursor */
+button,
+a,
+input,
+[role="button"],
+[tabindex] {
+  cursor: pointer !important;
+}
+
+/* Fix specific sections with original colors */
+.hero-section {
+  background-color: #f8f6f1 !important;
+}
+
+.benefits-section {
+  background-color: #fefefe !important;
+}
+
+.purchase-section {
+  background-color: #f8f6f1 !important;
+}
+
+.story-section {
+  background-color: #fefefe !important;
+}
+
+.waitlist-section {
+  background-color: #fefefe !important;
+}
+
+.footer-section {
+  background-color: #5e4b8b !important;
+}
+
+/* Hero section can - 3x size */
+.hero-section img[alt="Mad Nektr Can"] {
+  transform: scale(3) !important; /* Changed from 1.4 to 3 */
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Purchase section can - 2x size */
+.purchase-section img[alt="Mad Nektr Can"] {
+  transform: scale(2) !important; /* Changed from 1.4 to 2 */
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Product page can scaling */
+.product-page img[alt="Mad Nektr Can"] {
+  transform: scale(1.4) !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Adjust containers for larger cans */
+.hero-can-container,
+.purchase-can-container,
+.product-can-container {
+  overflow: visible !important;
+  padding: 4rem !important; /* Increased padding for larger cans */
+  min-height: 600px !important; /* Ensure enough space */
+}
+
+/* Hero section specific container adjustments */
+.hero-can-container {
+  padding: 6rem !important; /* Extra padding for 3x can */
+  min-height: 800px !important;
+}
+
+/* Gradient text with original colors */
+.gradient-text {
+  background-image: linear-gradient(135deg, #f5b2d6, #87c7ff, #c4b7f2) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Hide the quote section completely */
+.experience-section .bg-gray-50.rounded-2xl {
+  display: none !important;
+}
+
+/* Alternative hiding method */
+.text-xl.italic.text-slate-800.mb-6 {
+  display: none !important;
+}
+
+/* Hide any element containing the specific text */
+*:contains("This isn't about getting drunk") {
+  display: none !important;
+}
+
+/* Responsive adjustments for larger cans */
+@media (max-width: 768px) {
+  .hero-section img[alt="Mad Nektr Can"] {
+    transform: scale(2) !important; /* Smaller on mobile */
+  }
+
+  .purchase-section img[alt="Mad Nektr Can"] {
+    transform: scale(1.5) !important; /* Smaller on mobile */
+  }
+
+  .hero-can-container {
+    padding: 3rem !important;
+    min-height: 500px !important;
+  }
+
+  .purchase-can-container {
+    padding: 2rem !important;
+    min-height: 400px !important;
+  }
+
+  /* Adjust hero padding for mobile */
+  .hero-section {
+    padding-top: 120px !important;
+  }
+
+  /* Mobile nav positioning */
+  nav {
+    top: 48px !important;
+  }
+
+  /* Mobile body margin */
+  body {
+    margin-top: 48px !important;
+  }
+}
+
+/* Ensure smooth transitions */
+.hero-can-image,
+.purchase-can-image {
+  transition: transform 0.3s ease !important;
+}
+
+/* Fix any overflow issues */
+.hero-section,
+.purchase-section {
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-animation,
+  .fade-in-up {
+    animation: none !important;
+  }
+}
